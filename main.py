@@ -1,12 +1,3 @@
-
-#!usr/bin/env python3.6
-
-# Date: 11-04-18, Nov ~ 4th 2018 | Synchronocy
-# Project: Steam Network Mapper
-# new project
-# IDLE Python 3.6 64-bit
-
-
 import requests
 import os
 import matplotlib.pyplot as plt
@@ -20,12 +11,12 @@ G = nx.Graph();
 def save(user):
     try:
         fig_size = plt.rcParams["figure.figsize"]
-        if len(G.nodes() > 20:
-               fig_size[0] = str(len(G.nodes())*0.5)
-               fig_size[1] = str(len(G.nodes())*0.5)
+        if len(G.nodes()) > 30:
+            fig_size[0] = str(len(G.nodes())*0.05)
+            fig_size[1] = str(len(G.nodes())*0.05)
         else:
-               fig_size[0] = 20
-               fig_size[1] = 20
+            fig_size[0] = 30
+            fig_size[1] = 30
         edges = G.edges()
         colors = [G[u][v]['color'] for u,v in edges]
         plt.rcParams["figure.figsize"] = fig_size
@@ -50,15 +41,15 @@ def scan(user):
         if 'login/home/?' in link:
             continue
         #print(link)
+        G.add_node(link)
         if len(link) < 1:
             continue
-        G.add_node(link)
-        G.add_edge(user, link, color='g')
         friends.append(link)
+        G.add_edge(user, link, color='g')
 
 def main():
     counter = 0
-    user = 'id/injewlid'# E.G https://steamcommunity.com/ YourProfileLinkHere
+    user = 'id/injewlid'
     steps = 3 # Friends to search for mutual
     if steps <= 3:
         scan(user)
